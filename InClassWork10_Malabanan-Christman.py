@@ -1,3 +1,5 @@
+CREDIT_MAX = 20
+
 class Student:
     def __init__(self,Name,Age,Courses_Taken=[],Current_Classes=[]):
         self.Name = Name #Initializes all variables
@@ -26,6 +28,11 @@ class Student:
             print("Enrolled in class.")
         else:
             print("Error: One or more prerequisites not met.")
+    def currentcredits(self):
+        sum = 0
+        for i in self.Current_Classes:
+            sum += i.Credits
+        return sum
             
 class EEMajor(Student):
     def __init__(self,Name,Age,Courses_Taken=[],Current_Classes=[]):
@@ -33,17 +40,18 @@ class EEMajor(Student):
         self.Major = "EE"
         
 class Course:
-    def __init__(self,Name,Code,Prerequisites,Max,enrollment=[],times=[[],[],[],[],[]]): #Times is a list of lists representing the start and end times for each day. For example, a course meating MWR 1:00 pm to 2:30 pm would be [[13,14.3],[],[13,14.3],[13,14.3],[]]
+    def __init__(self,Name,Code,Prerequisites,Max,Credits,enrollment=[],times=[[],[],[],[],[]]): #Times is a list of lists representing the start and end times for each day. For example, a course meating MWR 1:00 pm to 2:30 pm would be [[13,14.3],[],[13,14.3],[13,14.3],[]]
         self.Name = Name #Initializes all variables
         self.Code = Code
         self.enrollment = enrollment
         self.Prereqs = Prerequisites
         self.Max = Max
         self.times = times
+        self.Credits = Credits
     def add_student(self,student):
         toApply = True #All the requirements are currently met
         for i in self.Prereqs:  
-            if i not in student.Courses: #If the student hasn't taken a prereq
+            if i not in student.Courses or student.currentcredits() > CREDIT_MAX: #If the student hasn't taken a prereq
                 toApply = False #The requirements are no longer met
         if toApply and len(self.enrollment) < self.Max: #If the requirements are met and the class isn't full
             self.enrollment.append(student) #Adds the student to the current enrollment
