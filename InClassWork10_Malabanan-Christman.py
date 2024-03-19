@@ -113,3 +113,33 @@ class Course:
                 if self.times[i][0] <= j[1] or self.times[i][1] >= j[0]: #If the current class starts before the student's class ends or ends after the student's class starts
                     return True #Returns that there is a time conflict
         return False #There is no conflict
+
+class EECE2150(Course):
+    def __init__(self, Prerequisites):
+        super.__init__(self,Prerequisites)
+    def prereqs(self):
+        self.Prerequisites = ["GE1111"] + ["MATH2341"] + ["PHYS1165"] + ["EECE2140"]
+
+class EECE2520(Course):
+    def __init__(self, Prerequisites):
+        super.__init__(self,Prerequisites)
+    def prereqs(self):
+        self.Prerequisites = ["EECE2150"] + ["MATH2341"]
+
+class EECE2530(Course):
+    def __init__(self, Prerequisites):
+        super.__init__(self,Prerequisites)
+    def prereqs(self):
+        self.Prerequisites = ["EECE2150"] + ["MATH2341"] + ["PHYS1165"]
+    
+class EECE2531(Course):
+    def __init__(self, Prerequisites):
+        super.__init__(self,Prerequisites)
+    def prereqs(self):
+        self.Prerequisites = ["EECE2150"] + ["MATH2341"] + ["PHYS1165"]
+    
+class EECE2540(Course):
+    def __init__(self, Prerequisites):
+        super.__init__(self,Prerequisites)
+    def prereqs(self):
+        self.Prerequisites = ["EECE2140"]
