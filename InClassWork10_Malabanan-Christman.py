@@ -55,11 +55,16 @@ class CIVEMajor(Student):
     def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
         super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
         self.Major = "CIVE"
-    
-class EECEMajor(Student):
+
+class ENVMajor(Student):
     def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
         super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
-        self.Major = "EECE"
+        self.Major = "ENV"
+    
+class CEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "CE"
 
 class CSMajor(Student):
     def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
