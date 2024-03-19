@@ -38,6 +38,31 @@ class EEMajor(Student):
     def __init__(self,Name,Age,Courses_Taken=[],Current_Classes=[]):
         super.__init__(self,Name,Age,Courses_Taken=[],Current_Classes=[])
         self.Major = "EE"
+
+class CHMEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "CHME"
+    
+class CIVEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "CIVE"
+    
+class EECEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "EECE"
+
+class CSMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "CS"
+
+class PHYSMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "PHYS"
         
 class Course:
     def __init__(self,Name,Code,Prerequisites,Max,Credits,enrollment=[],times=[[],[],[],[],[]]): #Times is a list of lists representing the start and end times for each day. For example, a course meating MWR 1:00 pm to 2:30 pm would be [[13,14.3],[],[13,14.3],[13,14.3],[]]
