@@ -10,7 +10,7 @@ class Student:
     def Toprint(self):
         print("Student information:", self.Name, self.Age, self.Major) #Shows the info about the student
     def addCourse(self,course):
-        if course not in self.Courses(): #If the course isn't already in the list of their taken courses
+        if course not in self.Courses: #If the course isn't already in the list of their taken courses
             self.Courses.append(course) #Adds a course to the student's taken classes (this does not enroll the student in the actual course)
             print("Class added to previously taken courses.")
         else:
@@ -30,16 +30,15 @@ class Student:
             print("Error: One or more prerequisites not met.")
     def currentcredits(self):
         sum = 0
-        for i in self.Current_Classes:
+        for i in self.current:
             sum += i.Credits
         return sum
     def currenttimes(self):
-        tor = [[],[],[],[],[]] #Creates an empty list of lists for each day of the week
-        for i in range(0,len(self.Current_Classes)): #For each current class
-            for j in range(0,6): #For each day
-                if len(self.Current_Classes[i][j]) > 0: #If the class meets this day
-                    tor[i].append(self.Current_Classes[i][j]) #Adds the class times to the student's current times
-        return tor #Returns the two dimensional list
+        tor = [[], [], [], [], []]
+        for course in self.current: #For each course the student is currently taking
+            for i in range(len(course.times)): #For each day of the course
+                tor[i].append(course.times[i]) #Add the times in the current student's day
+        return tor #Returns the list of student's times
             
 class EEMajor(Student):
     def __init__(self,Name,Age,Courses_Taken=[],Current_Classes=[]):
@@ -56,13 +55,16 @@ class CIVEMajor(Student):
         super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
         self.Major = "CIVE"
     
+class EECEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[]):
+        return 0
 class ENVMajor(Student):
-    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[]):
         super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
         self.Major = "ENV"
     
 class CEMajor(Student):
-    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[]):
         super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
         self.Major = "CE"
 
@@ -108,36 +110,6 @@ class Course:
         studentlist = student.currenttimes()
         for i in range(0,len(self.times)): #For each day in the week:
             for j in studentlist[i]: #For each class the student has this day:
-                if self.times[i][0] < i[1] or self.times[i][1] > i[0]: #If the current class starts before the student's class ends or ends after the student's class starts
+                if self.times[i][0] <= j[1] or self.times[i][1] >= j[0]: #If the current class starts before the student's class ends or ends after the student's class starts
                     return True #Returns that there is a time conflict
         return False #There is no conflict
-
-class EECE2150(Course):
-    def __init__(self, Prerequisites):
-        super.__init__(self,Prerequisites)
-    def prereqs(self):
-        self.Prerequisites = ["GE1111"] + ["MATH2341"] + ["PHYS1165"] + ["EECE2140"]
-
-class EECE2520(Course):
-    def __init__(self, Prerequisites):
-        super.__init__(self,Prerequisites)
-    def prereqs(self):
-        self.Prerequisites = ["EECE2150"] + ["MATH2341"]
-
-class EECE2530(Course):
-    def __init__(self, Prerequisites):
-        super.__init__(self,Prerequisites)
-    def prereqs(self):
-        self.Prerequisites = ["EECE2150"] + ["MATH2341"] + ["PHYS1165"]
-    
-class EECE2531(Course):
-    def __init__(self, Prerequisites):
-        super.__init__(self,Prerequisites)
-    def prereqs(self):
-        self.Prerequisites = ["EECE2150"] + ["MATH2341"] + ["PHYS1165"]
-    
-class EECE2540(Course):
-    def __init__(self, Prerequisites):
-        super.__init__(self,Prerequisites)
-    def prereqs(self):
-        self.Prerequisites = ["EECE2140"]
