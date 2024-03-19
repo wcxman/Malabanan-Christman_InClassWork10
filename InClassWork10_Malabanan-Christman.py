@@ -33,6 +33,13 @@ class Student:
         for i in self.Current_Classes:
             sum += i.Credits
         return sum
+    def currenttimes(self):
+        tor = [[],[],[],[],[]] #Creates an empty list of lists for each day of the week
+        for i in range(0,len(self.Current_Classes)): #For each current class
+            for j in range(0,6): #For each day
+                if len(self.Current_Classes[i][j]) > 0: #If the class meets this day
+                    tor[i].append(self.Current_Classes[i][j]) #Adds the class times to the student's current times
+        return tor #Returns the two dimensional list
             
 class EEMajor(Student):
     def __init__(self,Name,Age,Courses_Taken=[],Current_Classes=[]):
@@ -50,8 +57,10 @@ class Course:
         self.Credits = Credits
     def add_student(self,student):
         toApply = True #All the requirements are currently met
+        if student.currentcredits() + self.Credits > CREDIT_MAX:
+            toApply=False
         for i in self.Prereqs:  
-            if i not in student.Courses or student.currentcredits() > CREDIT_MAX: #If the student hasn't taken a prereq
+            if i not in student.Courses: #If the student hasn't taken a prereq
                 toApply = False #The requirements are no longer met
         if toApply and len(self.enrollment) < self.Max: #If the requirements are met and the class isn't full
             self.enrollment.append(student) #Adds the student to the current enrollment
@@ -65,3 +74,10 @@ class Course:
             print("Prerequisite added.")
         else:
             print("Error: Prerequisite already in course")
+    def check_time_conflict(self,student):
+        studentlist = student.currenttimes()
+        for i in range(0,len(self.times)): #For each day in the week:
+            for j in studentlist[i]: #For each class the student has this day:
+                if self.times[i][0] < i[1] or self.times[i][1] > i[0]: #If the current class starts before the student's class ends or ends after the student's class starts
+                    return True #Returns that there is a time conflict
+        return False #There is no conflict
