@@ -45,6 +45,31 @@ class EEMajor(Student):
     def __init__(self,Name,Age,Courses_Taken=[],Current_Classes=[]):
         super.__init__(self,Name,Age,Courses_Taken=[],Current_Classes=[])
         self.Major = "EE"
+
+class CHMEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "CHME"
+    
+class CIVEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "CIVE"
+    
+class EECEMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "EECE"
+
+class CSMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "CS"
+
+class PHYSMajor(Student):
+    def __init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        super.__init__(self, Name, Age, Courses_Taken=[],Current_Classes=[])
+        self.Major = "PHYS"
         
 class Course:
     def __init__(self,Name,Code,Prerequisites,Max,Credits,enrollment=[],times=[[],[],[],[],[]]): #Times is a list of lists representing the start and end times for each day. For example, a course meating MWR 1:00 pm to 2:30 pm would be [[13,14.3],[],[13,14.3],[13,14.3],[]]
@@ -74,6 +99,7 @@ class Course:
             print("Prerequisite added.")
         else:
             print("Error: Prerequisite already in course")
+<<<<<<< HEAD
     def check_time_conflict(self,student):
         studentlist = student.currenttimes()
         for i in range(0,len(self.times)): #For each day in the week:
@@ -81,3 +107,5 @@ class Course:
                 if self.times[i][0] < i[1] or self.times[i][1] > i[0]: #If the current class starts before the student's class ends or ends after the student's class starts
                     return True #Returns that there is a time conflict
         return False #There is no conflict
+=======
+>>>>>>> 64091427f1d3234b4cf15d0cae19c6af552891c8
